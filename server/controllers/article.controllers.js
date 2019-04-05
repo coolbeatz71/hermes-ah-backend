@@ -51,7 +51,7 @@ const controller = {
     } catch (error) {
       return res.status(500).json({
         error,
-        message: 'Oops! There seem to be a database error',
+        message: 'Oops! There seems to be a database error',
       });
     }
   },
@@ -63,13 +63,16 @@ const controller = {
         });
       }
 
-      const article = await Article.destroy({
+      const { userObj } = req.user;
+
+      const articleToBeDeleted = await Article.destroy({
         where: {
           id: req.params.id,
+          user_id: userObj.id,
         },
       });
 
-      if (!article) {
+      if (!articleToBeDeleted) {
         return res.status(404).json({
           error: 'Article not found',
         });
@@ -81,7 +84,7 @@ const controller = {
     } catch (error) {
       return res.status(500).json({
         error,
-        message: 'Oops! There seem to be a database error',
+        message: 'Oops! There seems to be a database error',
       });
     }
   },
