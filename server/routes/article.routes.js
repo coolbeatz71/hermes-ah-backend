@@ -12,4 +12,6 @@ router.get(
   articleController.getOneArticle
 );
 
+router.delete('/article/:id', articleController.deleteArticle);
+
 export default router;

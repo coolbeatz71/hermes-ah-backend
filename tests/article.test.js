@@ -99,4 +99,26 @@ describe('ARTICLE', () => {
         done();
       });
   });
+
+  it('should respond with article not found', done => {
+    chai
+      .request(app)
+      .delete(`/api/v1/article/4139d3af-b8b4-44f6-a49f-9305791710f7`)
+      .end((err, res) => {
+        expect(res).to.have.status(404);
+        expect(res.body.error).to.equal('Article not found');
+        done();
+      });
+  });
+
+  it('should respond with success: article deleted', done => {
+    chai
+      .request(app)
+      .delete(`/api/v1/article/fb3def47-153c-40bd-8161-a1c787e083d6`)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body.message).to.equal('Article Deleted Successfully');
+        done();
+      });
+  });
 });
